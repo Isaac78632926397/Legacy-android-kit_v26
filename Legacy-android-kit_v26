@@ -1,0 +1,131 @@
+!/usr/bin/env python3
+import os
+import sys
+import subprocess
+import shutil
+
+# Color codes for clean terminal output
+GREEN = "\033[92m"
+YELLOW = "\033[93m"
+RED = "\033[91m"
+RESET = "\033[0m"
+
+def check_dependencies():
+    """Verify that adb and fastboot are installed on the host system."""
+    dependencies = ["adb", "fastboot"]
+    missing = []
+    for tool in dependencies:
+        if not shutil.which(tool):
+            missing.append(tool)
+    
+    if missing:
+        print(f"{RED}[!] Error: Missing required tools: {', '.join(missing)}{RESET}")
+        print(f"{YELLOW}[*] Please install Android Platform Tools via Homebrew (macOS) or APT (Linux).{RESET}")
+        sys.exit(1)
+    print(f"{GREEN}[+] Android environment dependencies verified.{RESET}\n")
+
+def run_command(command):
+    """Executes a system command and returns the output safely."""
+    try:
+        result = subprocess.run(command, shell=True, check=True, text=True, capture_output=True)
+        return result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        print(f"{RED}[!] Command failed: {command}{RESET}")
+        print(f"{RED}Error log: {e.stderr.strip()}{RESET}")
+        return None
+
+def check_connected_devices():
+    """Scans for legacy devices in ADB or Fastboot mode."""
+    print(f"{YELLOW}[*] Scanning for connected Android devices...{RESET}")
+    
+    # Check ADB
+    adb_devices = run_command("adb devices")
+    if adb_devices:
+        lines = adb_devices.split("\n")[1:]
+        devices = [line.split()[0] for line in lines if line.strip() and "device" in line]
+        if devices:
+            print(f"{GREEN}[+] Found {len(devices)} device(s) in ADB mode: {', '.join(devices)}{RESET}")
+            return "adb"
+
+    # Check Fastboot
+    fastboot_devices = run_command("fastboot devices")
+    if fastboot_devices:
+        devices = [line.split()[0] for line in fastboot_devices.split("\n") if line.strip()]
+        if devices:
+            print(f"{GREEN}[+] Found {len(devices)} device(s) in Fastboot bootloader mode: {', '.join(devices)}{RESET}")
+            return "fastboot"
+
+    print(f"{RED}[!] No devices detected. Plug in your device with USB Debugging enabled or boot into Fastboot mode.{RESET}")
+    return None
+
+def main_menu():
+    """Interactive CLI menu for the tool."""
+    print("=" * 50)
+    print(f"{GREEN}          LEGACY ANDROID KIT (CROSS-PLATFORM)          {RESET}")
+    print("=" * 50)
+    print("1. Scan for connected devices")
+    print("2. Reboot device to Bootloader (Fastboot)")
+    print("3. Unlock Bootloader (Legacy / OEM Unlock)")
+    print("4. Flash Custom Recovery (TWRP / OrangeFox)")
+    print("5. Sideload custom ROM zip file")
+    print("6. Erase / Wipe partitions (Cache & User Data)")
+    print("7. Exit")
+    print("=" * 50)
+
+def main():
+    check_dependencies()
+    
+    while True:
+        main_menu()
+        choice = input("Select an option (1-7): ").strip()
+        
+        if choice == "1":
+            check_connected_devices()
+        
+        elif choice == "2":
+            print(f"{YELLOW}[*] Sending reboot command...{RESET}")
+            run_command("adb reboot bootloader")
+            print(f"{GREEN}[+] Device instructed to boot into fastboot.{RESET}")
+        
+        elif choice == "3":
+            print(f"{YELLOW}[*] Attempting to unlock bootloader...{RESET}")
+            print(f"{YELLOW}[*] Note: For older devices, this runs legacy unlocking protocols.{RESET}")
+            # Tries older protocol first, then the modern one if it fails
+            if run_command("fastboot oem unlock") is None:
+                run_command("fastboot flashing unlock")
+        
+        elif choice == "4":
+            recovery_path = input("Drag and drop your custom recovery .img file here: ").strip().replace("\\", "")
+            if os.path.exists(recovery_path):
+                print(f"{YELLOW}[*] Flashing recovery partition...{RESET}")
+                run_command(f"fastboot flash recovery {recovery_path}")
+                print(f"{GREEN}[+] Recovery successfully flashed.{RESET}")
+            else:
+                print(f"{RED}[!] Invalid file path.{RESET}")
+                
+        elif choice == "5":
+            rom_path = input("Drag and drop your legacy custom ROM .zip file here: ").strip().replace("\\", "")
+            if os.path.exists(rom_path):
+                print(f"{YELLOW}[*] Starting ADB sideload. Make sure recovery sideload feature is active!{RESET}")
+                run_command(f"adb sideload {rom_path}")
+            else:
+                print(f"{RED}[!] Invalid file path.{RESET}")
+                
+        elif choice == "6":
+            confirm = input(f"{RED}Are you sure you want to wipe this legacy device? (y/N): {RESET}").lower()
+            if confirm == 'y':
+                print(f"{YELLOW}[*] Erasing user data and system cache tables...{RESET}")
+                run_command("fastboot erase cache")
+                run_command("fastboot erase userdata")
+                print(f"{GREEN}[+] Device wiped clean.{RESET}")
+                
+        elif choice == "7":
+            print(f"{GREEN}[+] Exiting Legacy Android Kit. Goodbye!{RESET}")
+            break
+        else:
+            print(f"{RED}[!] Invalid entry. Try again.{RESET}")
+            
+        input("\nPress Enter to return to the main menu...")
+
+if __name__ == "__main__":
+    main()
