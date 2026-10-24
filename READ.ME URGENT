@@ -1,0 +1,37 @@
+# Legacy Android Kit (Beta)
+
+⚠️ **WARNING: This software is currently in BETA. Flashing low-level firmware carries an inherent risk of bricking your device. Use entirely at your own risk.**
+
+A cross-platform command-line tool designed to restore, wipe, and interface with legacy Android devices.
+
+## System Requirements
+* **macOS:** Big Sur (11.0) or later
+* **Windows:** Windows 7 or later
+* **Linux:** Any modern distribution (Ubuntu, Debian, Fedora, etc.)
+
+## Installation & Setup
+
+### 1. Install Android Platform Tools
+Before running the kit, you must install `adb` and `fastboot` on your host system:
+* **macOS:** Run `brew install android-platform-tools` via Homebrew.
+* **Windows:** Download the official Platform Tools ZIP from Google, extract it, and add the folder to your System PATH variables.
+* **Linux:** Run `sudo apt install adb fastboot` or your distro's equivalent.
+
+### 2. Download and Run the Kit
+
+#### On macOS & Linux:
+```bash
+git clone <YOUR_PRIVATE_REPOSITORY_URL>
+cd <YOUR_REPOSITORY_NAME>
+chmod +x legacy_android_kit.py
+python3 legacy_android_kit.py
+```
+
+#### On Windows:
+1. Ensure Python 3 is installed from the Microsoft Store or python.org.
+2. Open Command Prompt (`cmd`) or PowerShell and run:
+```cmd
+git clone <YOUR_PRIVATE_REPOSITORY_URL>
+cd <YOUR_REPOSITORY_NAME>
+python legacy_android_kit.py
+```
