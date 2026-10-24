@@ -34,4 +34,4 @@ python3 legacy_android_kit.py
 git clone <https://github.com/Isaac78632926397/Legacy-android-kit_v26>
 cd <https://github.com/Isaac78632926397/Legacy-android-kit_v26>
 python legacy_android_kit.py
-```
+``` 
