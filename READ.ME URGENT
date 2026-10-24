@@ -21,7 +21,7 @@ Before running the kit, you must install `adb` and `fastboot` on your host syste
 
 #### On macOS & Linux:
 ```bash
-git clone <YOUR_PRIVATE_REPOSITORY_URL>
+git clone <https://github.com/Isaac78632926397/Legacy-android-kit_v26>
 cd <YOUR_REPOSITORY_NAME>
 chmod +x legacy_android_kit.py
 python3 legacy_android_kit.py
@@ -31,7 +31,7 @@ python3 legacy_android_kit.py
 1. Ensure Python 3 is installed from the Microsoft Store or python.org.
 2. Open Command Prompt (`cmd`) or PowerShell and run:
 ```cmd
-git clone <YOUR_PRIVATE_REPOSITORY_URL>
-cd <YOUR_REPOSITORY_NAME>
+git clone <https://github.com/Isaac78632926397/Legacy-android-kit_v26>
+cd <https://github.com/Isaac78632926397/Legacy-android-kit_v26>
 python legacy_android_kit.py
 ```
