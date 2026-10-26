@@ -1,0 +1,10 @@
+# Install Git and GitHub CLI
+winget install --id Git.Git -e
+winget install --id GitHub.cli -e
+
+# Sign in to GitHub
+gh auth login
+
+# Clone the repo
+gh repo clone Isaac78632926397/Legacy-android-kit_v26
+cd .\Legacy-android-kit_v26
