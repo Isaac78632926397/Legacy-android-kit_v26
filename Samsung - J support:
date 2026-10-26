@@ -1,0 +1,88 @@
+import os
+
+SAMSUNG_J_SUPPORT = {
+    # Galaxy J3
+    "SM-J320FN": {
+        "name": "Galaxy J3 2016",
+        "family": "J3 2016",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "J320FNXXU5CRC1_HOME.tar.md5",
+            "J320FNXXU5CRB1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact model + region must match."
+    },
+    "SM-J330F": {
+        "name": "Galaxy J3 2017",
+        "family": "J3 2017",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "J330FXXU4ASC1_HOME.tar.md5",
+            "J330FXXU4ASD1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact model + region must match."
+    },
+
+    # Galaxy J5
+    "SM-J500F": {
+        "name": "Galaxy J5 2016",
+        "family": "J5 2016",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "J500FXXU4BQC1_HOME.tar.md5",
+            "J500FXXU4BQD1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact model + region must match."
+    },
+    "SM-J530F": {
+        "name": "Galaxy J5 2017",
+        "family": "J5 2017",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "J530FXXU6BSC1_HOME.tar.md5",
+            "J530FXXU6BSD1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact model + region must match."
+    },
+
+    # Galaxy J7
+    "SM-J700F": {
+        "name": "Galaxy J7 2016",
+        "family": "J7 2016",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "J700FXXU5CRK1_HOME.tar.md5",
+            "J700FXXU5CRL1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact model + region must match."
+    },
+    "SM-J730F": {
+        "name": "Galaxy J7 2017",
+        "family": "J7 2017",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "J730FXXU5CSD1_HOME.tar.md5",
+            "J730FXXU5CSE1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact model + region must match."
+    },
+
+    # Galaxy J6 / J8 / J10
+    "SM-J600G": {
+        "name": "Galaxy J6",
+        "family": "J6",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported only if the device allows it",
+        "regions": ["X
