@@ -9,4 +9,4 @@ gh auth login
 
 # Clone the repo
 gh repo clone Isaac78632926397/Legacy-android-kit_v26
-cd Legacy-android-kit_v26
+cd Legacy-android-kit_v26 
