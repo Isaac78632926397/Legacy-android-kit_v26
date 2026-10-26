@@ -1,0 +1,158 @@
+import os
+from typing import Dict, List
+
+PIXEL_SUPPORT: Dict[str, Dict[str, object]] = {
+    # Google Pixel 2
+    "walleye": {
+        "name": "Google Pixel 2",
+        "family": "pixel_2",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["8.1", "9.0", "10.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    },
+    "taimen": {
+        "name": "Google Pixel 2 XL",
+        "family": "pixel_2xl",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["8.1", "9.0", "10.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    },
+
+    # Google Pixel 3
+    "blueline": {
+        "name": "Google Pixel 3",
+        "family": "pixel_3",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["9.0", "10.0", "11.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    },
+    "crosshatch": {
+        "name": "Google Pixel 3 XL",
+        "family": "pixel_3xl",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["9.0", "10.0", "11.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    },
+
+    # Google Pixel 3a
+    "sargo": {
+        "name": "Google Pixel 3a",
+        "family": "pixel_3a",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["9.0", "10.0", "11.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    },
+    "bonito": {
+        "name": "Google Pixel 3a XL",
+        "family": "pixel_3axl",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["9.0", "10.0", "11.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    },
+
+    # Google Pixel 4
+    "flame": {
+        "name": "Google Pixel 4",
+        "family": "pixel_4",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["10.0", "11.0", "12.0", "13.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    },
+    "coral": {
+        "name": "Google Pixel 4 XL",
+        "family": "pixel_4xl",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["10.0", "11.0", "12.0", "13.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    },
+
+    # Google Pixel 4a
+    "sunfish": {
+        "name": "Google Pixel 4a",
+        "family": "pixel_4a",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["10.0", "11.0", "12.0", "13.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    },
+    "bramble": {
+        "name": "Google Pixel 4a (5G)",
+        "family": "pixel_4a_5g",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["11.0", "12.0", "13.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    },
+
+    # Google Pixel 5
+    "redfin": {
+        "name": "Google Pixel 5",
+        "family": "pixel_5",
+        "bootloader": "fastboot flashing unlock",
+        "tool": "fastboot",
+        "supported_regions": ["global", "us", "eu"],
+        "android_versions": ["11.0", "12.0", "13.0", "14.0"],
+        "firmware_source": "Google official factory image",
+        "notes": "Use official factory image zip from Google."
+    }
+}
+
+def validate_pixel(codename: str, region: str) -> Dict[str, object]:
+    if codename not in PIXEL_SUPPORT:
+        raise ValueError(f"Unsupported Pixel codename: {codename}")
+
+    info = PIXEL_SUPPORT[codename]
+
+    if region not in info["supported_regions"]:
+        raise ValueError(
+            f"{info['name']} does not support region '{region}'. "
+            f"Supported regions: {info['supported_regions']}"
+        )
+
+    return info
+
+def flash_pixel(codename: str, region: str, image_zip_path: str) -> None:
+    info = validate_pixel(codename, region)
+
+    if not os.path.exists(image_zip_path):
+        raise FileNotFoundError(f"Factory image not found: {image_zip_path}")
+
+    print(f"Device: {info['name']}")
+    print(f"Flashing tool: {info['tool']}")
+    print(f"Bootloader command: {info['bootloader']}")
+    print(f"Official firmware source: {info['firmware_source']}")
+    print(f"Using image zip: {image_zip_path}")
+    print("Next step: follow Google’s official factory-image procedure and use the extracted flash-all.sh / flash-all.bat from the image.")
+    print("Do not bypass OEM security or use unsupported firmware.")
+
+if __name__ == "__main__":
+    # Example usage
+    flash_pixel("redfin", "global", "/path/to/pixel_5_factory_image.zip")
