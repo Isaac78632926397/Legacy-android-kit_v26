@@ -1,0 +1,95 @@
+import os
+
+ONEPLUS_SUPPORT = {
+    # OnePlus 3
+    "oneplus3": {
+        "name": "OnePlus 3",
+        "family": "oneplus_3",
+        "tool": "fastboot",
+        "official_firmware": "OnePlus official firmware package",
+        "bootloader": "OEM unlock / fastboot unlock (if supported by the device)",
+        "supported_regions": ["global", "india", "us", "eu"],
+        "android_versions": ["7.1", "8.0"],
+        "notes": "Use official OnePlus firmware package and supported fastboot flashing path."
+    },
+
+    # OnePlus 3T
+    "oneplus3t": {
+        "name": "OnePlus 3T",
+        "family": "oneplus_3t",
+        "tool": "fastboot",
+        "official_firmware": "OnePlus official firmware package",
+        "bootloader": "OEM unlock / fastboot unlock (if supported by the device)",
+        "supported_regions": ["global", "india", "us", "eu"],
+        "android_versions": ["7.1", "8.0"],
+        "notes": "Use official OnePlus firmware package and supported fastboot flashing path."
+    },
+
+    # OnePlus 5
+    "cheeseburger": {
+        "name": "OnePlus 5",
+        "family": "oneplus_5",
+        "tool": "fastboot",
+        "official_firmware": "OnePlus official firmware package",
+        "bootloader": "OEM unlock / fastboot unlock (if supported by the device)",
+        "supported_regions": ["global", "india", "us", "eu"],
+        "android_versions": ["7.1", "8.0", "9.0"],
+        "notes": "Use official OnePlus firmware package and supported fastboot method."
+    },
+
+    # OnePlus 5T
+    "dumpling": {
+        "name": "OnePlus 5T",
+        "family": "oneplus_5t",
+        "tool": "fastboot",
+        "official_firmware": "OnePlus official firmware package",
+        "bootloader": "OEM unlock / fastboot unlock (if supported by the device)",
+        "supported_regions": ["global", "india", "us", "eu"],
+        "android_versions": ["7.1", "8.0", "9.0"],
+        "notes": "Use official OnePlus firmware package and supported fastboot method."
+    },
+
+    # OnePlus 6
+    "enchilada": {
+        "name": "OnePlus 6",
+        "family": "oneplus_6",
+        "tool": "fastboot",
+        "official_firmware": "OnePlus official firmware package",
+        "bootloader": "OEM unlock / fastboot unlock (if supported by the device)",
+        "supported_regions": ["global", "india", "us", "eu"],
+        "android_versions": ["8.1", "9.0", "10.0"],
+        "notes": "Use official OnePlus firmware package. Only use exact model/region matching."
+    }
+}
+
+def validate_oneplus(codename: str, region: str) -> dict:
+    if codename not in ONEPLUS_SUPPORT:
+        raise ValueError(f"Unsupported OnePlus codename: {codename}")
+
+    info = ONEPLUS_SUPPORT[codename]
+
+    if region not in info["supported_regions"]:
+        raise ValueError(
+            f"{info['name']} does not support region '{region}'. "
+            f"Supported regions: {info['supported_regions']}"
+        )
+
+    return info
+
+def flash_oneplus(codename: str, region: str, firmware_zip: str) -> None:
+    info = validate_oneplus(codename, region)
+
+    if not os.path.exists(firmware_zip):
+        raise FileNotFoundError(f"Firmware file not found: {firmware_zip}")
+
+    print(f"Device: {info['name']}")
+    print(f"Flashing tool: {info['tool']}")
+    print(f"Bootloader requirement: {info['bootloader']}")
+    print(f"Official firmware source: {info['official_firmware']}")
+    print(f"Using file: {firmware_zip}")
+    print("Only proceed with exact model + region + firmware matching.")
+    print("Do not bypass OEM security or use unsupported firmware.")
+
+if __name__ == "__main__":
+    # Example usage
+    flash_oneplus("enchilada", "global", "/path/to/oneplus6_firmware.zip")
