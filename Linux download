@@ -1,0 +1,13 @@
+# Debian/Ubuntu
+sudo apt update
+sudo apt install -y git gh
+
+# Or Fedora/RHEL
+# sudo dnf install -y git gh
+
+# Sign in to GitHub
+gh auth login
+
+# Clone the repo
+gh repo clone Isaac78632926397/Legacy-android-kit_v26
+cd Legacy-android-kit_v26
