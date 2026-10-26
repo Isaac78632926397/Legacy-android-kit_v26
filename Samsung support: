@@ -1,0 +1,116 @@
+
+
+
+
+import os
+
+SAMSUNG_SUPPORT = {
+    # Galaxy S7
+    "SM-G930F": {
+        "name": "Galaxy S7",
+        "family": "S7",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported on some variants, but only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "G930FXXU8EUC1_HOME.tar.md5",
+            "G930FXXU8EUD1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact region and model must match."
+    },
+    "SM-G935F": {
+        "name": "Galaxy S7 Edge",
+        "family": "S7 Edge",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported on some variants, but only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "G935FXXU8EUC1_HOME.tar.md5",
+            "G935FXXU8EUD1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact region and model must match."
+    },
+
+    # Galaxy S8
+    "SM-G950F": {
+        "name": "Galaxy S8",
+        "family": "S8",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported on some variants, but only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "G950FXXS8EUB1_HOME.tar.md5",
+            "G950FXXS8EUC1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact region and model must match."
+    },
+    "SM-G955F": {
+        "name": "Galaxy S8+",
+        "family": "S8+",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported on some variants, but only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "G955FXXS8EUB1_HOME.tar.md5",
+            "G955FXXS8EUC1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact region and model must match."
+    },
+
+    # Galaxy S9
+    "SM-G960F": {
+        "name": "Galaxy S9",
+        "family": "S9",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported on some variants, but only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "G960FXXS8EUA1_HOME.tar.md5",
+            "G960FXXU8EUB1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact region and model must match."
+    },
+    "SM-G965F": {
+        "name": "Galaxy S9+",
+        "family": "S9+",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported on some variants, but only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "G965FXXS8EUA1_HOME.tar.md5",
+            "G965FXXU8EUB1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact region and model must match."
+    },
+
+    # Galaxy S10
+    "SM-G970F": {
+        "name": "Galaxy S10",
+        "family": "S10",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported on some variants, but only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "G970FXXU8EUC1_HOME.tar.md5",
+            "G970FXXU8EUD1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact region and model must match."
+    },
+    "SM-G973F": {
+        "name": "Galaxy S10e",
+        "family": "S10e",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported on some variants, but only if the device allows it",
+        "regions": ["XEF", "XEO", "INS", "DBT", "VIR"],
+        "firmware": [
+            "G973FXXU8EUC1_HOME.tar.md5",
+            "G973FXXU8EUD1_HOME.tar.md5"
+        ],
+        "notes": "Official Samsung firmware only. Exact region and model must match."
+    },
+    "SM-G975F": {
+        "name": "Galaxy S10+",
+        "family": "S10+",
+        "tool": "Odin",
+        "bootloader": "OEM unlock may be supported on some variants, but only if the device allows it",
+        "regions": ["XEF", "X
