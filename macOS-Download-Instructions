@@ -1,0 +1,55 @@
+#!/bin/bash
+set -e
+
+REPO="Isaac78632926397/Legacy-android-kit_v26"
+DEST="$HOME/LegacyAndroidKit"
+
+echo "========================================"
+echo "Legacy Android Kit v26 - macOS installer"
+echo "========================================"
+
+if ! command -v gh >/dev/null 2>&1; then
+  echo "GitHub CLI is not installed."
+  echo ""
+  echo "Install GitHub CLI with Homebrew:"
+  echo '  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  echo '  echo '\''eval "$(/opt/homebrew/bin/brew shellenv)"'\'' >> ~/.zprofile'
+  echo '  source ~/.zprofile'
+  echo '  brew install gh'
+  echo ""
+  echo "Then run:"
+  echo "  gh auth login"
+  echo ""
+  exit 1
+fi
+
+if ! gh auth status >/dev/null 2>&1; then
+  echo "You are not signed in to GitHub."
+  echo ""
+  echo "Run this command:"
+  echo "  gh auth login"
+  echo ""
+  echo "Then run this script again."
+  exit 1
+fi
+
+mkdir -p "$DEST"
+cd "$DEST"
+
+if [ -d "Legacy-android-kit_v26" ]; then
+  echo "Repository already exists at $DEST/Legacy-android-kit_v26"
+  echo "Opening it..."
+  open "$DEST/Legacy-android-kit_v26"
+  exit 0
+fi
+
+echo "Cloning repository..."
+gh repo clone "$REPO"
+
+echo ""
+echo "Download complete."
+echo "Location:"
+echo "  $DEST/Legacy-android-kit_v26"
+echo ""
+echo "Opening the repo..."
+open "$DEST/Legacy-android-kit_v26"
